@@ -15,33 +15,35 @@ import java.util.List;
 
 @Mapper(componentModel = "spring",
         nullValuePropertyMappingStrategy = NullValuePropertyMappingStrategy.IGNORE)
-public interface CheckpointMapper {
-    
+public abstract class CheckpointMapper {
+
+    @Autowired
+    private LocationClient locationClient;
+
+    @Autowired
+    private PackageClient packageClient;
+
     @Mapping(target = "locationEntityId", source = "packageEntity")
     @Mapping(target = "packageEntityId", source = "packageEntity")
-    CheckpointEntity toEntity(CheckpointRequestDto checkpointRequestDto);
+    public abstract CheckpointEntity toEntity(CheckpointRequestDto checkpointRequestDto);
 
     @Mapping(target = "id", source = "checkpointEntity.id")
     @Mapping(target = "locationDto", source = "locationEntityId", qualifiedByName = "checkpointLocation")
     @Mapping(target = "packageDto", source = "packageEntityId", qualifiedByName = "checkpointPackage")
-    CheckpointResponseDto toDto(CheckpointEntity CheckpointEntity);
+    public abstract CheckpointResponseDto toDto(CheckpointEntity CheckpointEntity);
 
     @Mapping(target = "locationDto", source = "locationEntityId", qualifiedByName = "checkpointLocation")
     @Mapping(target = "packageDto", source = "packageEntityId", qualifiedByName = "checkpointPackage")
-    List<CheckpointResponseDto> toDtoList(List<CheckpointEntity> CheckpointEntity);
+    public abstract List<CheckpointResponseDto> toDtoList(List<CheckpointEntity> CheckpointEntity);
 
-    @Named("packageWithLocation")
-    default LocationReponseDto checkpointLocation(Long id) {
-        return locationClient().getLocationById(String.valueOf(id)).getBody();
+    @Named("checkpointPackage")
+    LocationReponseDto checkpointLocation(Long id) {
+        return locationClient.getLocationById(String.valueOf(id)).getBody();
     }
 
     @Named("packageWithLocation")
-    default ResponseEntity<PackageResponseDto> checkpointPackage(Long id) {
-        return ResponseEntity.ok(packageClient().getById(id).getBody());
+    ResponseEntity<PackageResponseDto> checkpointPackage(Long id) {
+        return ResponseEntity.ok(packageClient.getById(id).getBody());
     }
 
-    LocationClient locationClient();
-
-
-    PackageClient packageClient();
 }

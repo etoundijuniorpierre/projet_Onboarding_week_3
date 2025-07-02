@@ -16,11 +16,16 @@ import java.util.List;
 @RequestMapping("/api/Checkpoint")
 public class CheckpointController {
 
-    @Autowired
-    private CheckpointService checkpointService;
 
-    @Autowired
-    private CheckpointMapper checkpointMapper;
+    private final CheckpointService checkpointService;
+
+
+    private final CheckpointMapper checkpointMapper;
+
+    public CheckpointController(CheckpointService checkpointService, CheckpointMapper checkpointMapper) {
+        this.checkpointService = checkpointService;
+        this.checkpointMapper = checkpointMapper;
+    }
 
     @PostMapping
     public ResponseEntity<CheckpointResponseDto> createCheckpoint(@RequestBody CheckpointRequestDto checkpointRequestDto) {
