@@ -27,7 +27,7 @@ public abstract class CheckpointMapper {
     @Mapping(target = "packageEntityId", source = "packageEntity")
     public abstract CheckpointEntity toEntity(CheckpointRequestDto checkpointRequestDto);
 
-    @Mapping(target = "", source = "")
+    @Mapping(target = "id", source = "checkpointEntity.id")
     @Mapping(target = "locationDto", source = "locationEntityId", qualifiedByName = "checkpointLocation")
     @Mapping(target = "packageDto", source = "packageEntityId", qualifiedByName = "checkpointPackage")
     public abstract CheckpointResponseDto toDto(CheckpointEntity CheckpointEntity);
