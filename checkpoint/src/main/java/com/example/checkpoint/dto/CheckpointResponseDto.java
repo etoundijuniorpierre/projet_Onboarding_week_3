@@ -10,8 +10,7 @@ import java.time.LocalDateTime;
 @Data
 public class CheckpointResponseDto {
     private Long id;
-    private LocalDateTime checkpointDate;
+    private LocalDateTime passDateTime;
     private PackageResponseDto packageDto;
     private LocationReponseDto locationDto;
-
 }

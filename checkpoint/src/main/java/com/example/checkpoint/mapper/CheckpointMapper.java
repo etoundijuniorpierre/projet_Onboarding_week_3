@@ -13,8 +13,7 @@ import org.springframework.http.ResponseEntity;
 
 import java.util.List;
 
-@Mapper(componentModel = "spring",
-        nullValuePropertyMappingStrategy = NullValuePropertyMappingStrategy.IGNORE)
+@Mapper(componentModel = "spring")
 public abstract class CheckpointMapper {
 
     @Autowired
@@ -23,27 +22,27 @@ public abstract class CheckpointMapper {
     @Autowired
     private PackageClient packageClient;
 
-    @Mapping(target = "locationEntityId", source = "packageEntity")
+    @Mapping(target = "locationEntityId", source = "locationEntity")
     @Mapping(target = "packageEntityId", source = "packageEntity")
     public abstract CheckpointEntity toEntity(CheckpointRequestDto checkpointRequestDto);
 
-    @Mapping(target = "id", source = "checkpointEntity.id")
+    @Mapping(target = "id", source = "id")
     @Mapping(target = "locationDto", source = "locationEntityId", qualifiedByName = "checkpointLocation")
     @Mapping(target = "packageDto", source = "packageEntityId", qualifiedByName = "checkpointPackage")
-    public abstract CheckpointResponseDto toDto(CheckpointEntity CheckpointEntity);
+    public abstract CheckpointResponseDto toDto(CheckpointEntity checkpointEntity);
 
     @Mapping(target = "locationDto", source = "locationEntityId", qualifiedByName = "checkpointLocation")
     @Mapping(target = "packageDto", source = "packageEntityId", qualifiedByName = "checkpointPackage")
-    public abstract List<CheckpointResponseDto> toDtoList(List<CheckpointEntity> CheckpointEntity);
+    public abstract List<CheckpointResponseDto> toDtoList(List<CheckpointEntity> checkpointEntities);
 
-    @Named("checkpointPackage")
-    LocationReponseDto checkpointLocation(Long id) {
+    @Named("checkpointLocation")
+    public LocationReponseDto checkpointLocation(Long id) {
         return locationClient.getLocationById(String.valueOf(id)).getBody();
     }
 
-    @Named("packageWithLocation")
-    ResponseEntity<PackageResponseDto> checkpointPackage(Long id) {
-        return ResponseEntity.ok(packageClient.getById(id).getBody());
+    @Named("checkpointPackage")
+    public PackageResponseDto checkpointPackage(Long id) {
+        return packageClient.getById(id).getBody();
     }
-
 }
+
