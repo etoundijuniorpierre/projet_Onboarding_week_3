@@ -5,9 +5,12 @@ import org.springframework.cloud.openfeign.FeignClient;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.PutMapping;
+import org.springframework.web.bind.annotation.RequestBody;
 
-@FeignClient(name = "package-service", url = "http://localhost:8080/api/company")
+@FeignClient(name = "package-service", url = "http://localhost:8080/api/package")
 public interface PackageClient {
     @GetMapping("/{id}")
     ResponseEntity<PackageResponseDto> getById(@PathVariable Long id);
+
 }

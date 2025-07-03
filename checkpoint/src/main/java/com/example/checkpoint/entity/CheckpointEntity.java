@@ -20,5 +20,5 @@ public class CheckpointEntity {
     private Long locationEntityId;
 
     @Column
-    private LocalDateTime passDateTime;
+    private LocalDateTime passDateTime = LocalDateTime.now();
 }

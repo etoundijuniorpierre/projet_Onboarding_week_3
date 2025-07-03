@@ -9,7 +9,6 @@ import com.example.checkpoint.feign.LocationClient;
 import com.example.checkpoint.feign.PackageClient;
 import org.mapstruct.*;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.ResponseEntity;
 
 import java.util.List;
 
@@ -22,8 +21,8 @@ public abstract class CheckpointMapper {
     @Autowired
     private PackageClient packageClient;
 
-    @Mapping(target = "locationEntityId", source = "locationEntity")
-    @Mapping(target = "packageEntityId", source = "packageEntity")
+    @Mapping(target = "locationEntityId", source = "locationId")
+    @Mapping(target = "packageEntityId", source = "packageId")
     public abstract CheckpointEntity toEntity(CheckpointRequestDto checkpointRequestDto);
 
     @Mapping(target = "id", source = "id")

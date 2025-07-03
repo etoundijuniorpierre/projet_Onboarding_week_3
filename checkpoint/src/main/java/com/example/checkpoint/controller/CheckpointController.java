@@ -5,14 +5,14 @@ import com.example.checkpoint.dto.CheckpointResponseDto;
 import com.example.checkpoint.entity.CheckpointEntity;
 import com.example.checkpoint.mapper.CheckpointMapper;
 import com.example.checkpoint.service.CheckpointService;
-import io.swagger.v3.oas.annotations.parameters.RequestBody;
+import jakarta.validation.Valid;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
 @RestController
-@RequestMapping("/api/Checkpoint")
+@RequestMapping("/api/checkpoint")
 public class CheckpointController {
 
 
@@ -27,7 +27,7 @@ public class CheckpointController {
     }
 
     @PostMapping
-    public ResponseEntity<CheckpointResponseDto> createCheckpoint(@RequestBody CheckpointRequestDto checkpointRequestDto) {
+    public ResponseEntity<CheckpointResponseDto> createCheckpoint(@Valid @RequestBody CheckpointRequestDto checkpointRequestDto) {
         CheckpointEntity checkpointEntity = checkpointMapper.toEntity(checkpointRequestDto);
         CheckpointEntity createdCheckpoint = checkpointService.createCheckpoint(checkpointEntity);
         CheckpointResponseDto responseDto = checkpointMapper.toDto(createdCheckpoint);
