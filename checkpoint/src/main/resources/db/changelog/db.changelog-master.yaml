@@ -1,0 +1,34 @@
+databaseChangeLog:
+  - changeSet:
+      id: 1
+      author: junior
+      changes:
+        - createTable:
+            tableName: checkpoint_entity
+            columns:
+              - column:
+                  name: id
+                  type: BIGINT
+                  autoIncrement: true
+                  constraints:
+                    primaryKey: true
+                    nullable: false
+
+              - column:
+                  name: package_entity_id
+                  type: BIGINT
+                  constraints:
+                    nullable: true
+
+              - column:
+                  name: location_entity_id
+                  type: BIGINT
+                  constraints:
+                    nullable: true
+
+              - column:
+                  name: pass_date_time
+                  type: TIMESTAMP
+                  defaultValueComputed: CURRENT_TIMESTAMP
+                  constraints:
+                    nullable: true

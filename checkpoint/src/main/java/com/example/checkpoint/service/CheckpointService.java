@@ -14,6 +14,10 @@ public class CheckpointService {
     private CheckpointRepository checkpointRepository;
 
     public CheckpointEntity createCheckpoint(CheckpointEntity checkpointEntity) {
+        if(checkpointEntity.getLocationEntityId() == null || checkpointEntity.getPackageEntityId() == null) {
+            throw new IllegalArgumentException("checkpoint entity id and package entity id are required");
+        }
+
         return checkpointRepository.save(checkpointEntity);
     }
 

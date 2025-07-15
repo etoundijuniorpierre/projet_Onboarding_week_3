@@ -13,7 +13,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import java.util.List;
 
 @Mapper(componentModel = "spring")
-public abstract class CheckpointMapper {
+public abstract class  CheckpointMapper {
 
     @Autowired
     private LocationClient locationClient;
@@ -30,18 +30,30 @@ public abstract class CheckpointMapper {
     @Mapping(target = "packageDto", source = "packageEntityId", qualifiedByName = "checkpointPackage")
     public abstract CheckpointResponseDto toDto(CheckpointEntity checkpointEntity);
 
-    @Mapping(target = "locationDto", source = "locationEntityId", qualifiedByName = "checkpointLocation")
-    @Mapping(target = "packageDto", source = "packageEntityId", qualifiedByName = "checkpointPackage")
     public abstract List<CheckpointResponseDto> toDtoList(List<CheckpointEntity> checkpointEntities);
 
     @Named("checkpointLocation")
     public LocationReponseDto checkpointLocation(Long id) {
-        return locationClient.getLocationById(String.valueOf(id)).getBody();
+        if (id == null) {
+            return null;
+        }
+        LocationReponseDto dto = locationClient.getLocationById(String.valueOf(id)).getBody();
+        if (dto == null) {
+            return null;
+        }
+        return dto;
     }
 
     @Named("checkpointPackage")
     public PackageResponseDto checkpointPackage(Long id) {
-        return packageClient.getById(id).getBody();
+        if (id == null) {
+            return null;
+        }
+        PackageResponseDto dto = packageClient.getById(id).getBody();
+        if (dto == null) {
+            return null;
+        }
+        return dto;
     }
 }
 

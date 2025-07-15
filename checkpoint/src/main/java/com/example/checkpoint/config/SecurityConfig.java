@@ -44,7 +44,7 @@ import static org.springframework.security.config.Customizer.withDefaults;
         UrlBasedCorsConfigurationSource source = new UrlBasedCorsConfigurationSource();
         CorsConfiguration config = new CorsConfiguration();
         config.setAllowCredentials(true); // Permet les credentials (cookies, headers d'autorisation)
-        config.setAllowedOriginPatterns(Arrays.asList("http://localhost:*", "http://localhost:8082*")); // Ou votre domaine frontend exact
+        config.setAllowedOriginPatterns(Arrays.asList("http://localhost:*", "http://localhost:8082*")); // nom du domaine frontend exact
         config.setAllowedHeaders(Arrays.asList("Authorization", "Content-Type")); // Les headers autorisés
         config.setAllowedMethods(Arrays.asList("GET", "POST", "PUT", "DELETE", "OPTIONS")); // Les méthodes HTTP autorisées
         source.registerCorsConfiguration("/**", config); // Applique cette configuration à tous les chemins
