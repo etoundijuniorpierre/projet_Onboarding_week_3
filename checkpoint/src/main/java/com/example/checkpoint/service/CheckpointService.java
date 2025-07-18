@@ -5,7 +5,6 @@ import com.example.checkpoint.repository.CheckpointRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import java.time.LocalDateTime;
 import java.util.List;
 
 @Service
@@ -14,7 +13,7 @@ public class CheckpointService {
     private CheckpointRepository checkpointRepository;
 
     public CheckpointEntity createCheckpoint(CheckpointEntity checkpointEntity) {
-        if(checkpointEntity.getLocationEntityId() == null || checkpointEntity.getPackageEntityId() == null) {
+        if(checkpointEntity.getLocationId() == null || checkpointEntity.getPackageId() == null) {
             throw new IllegalArgumentException("checkpoint entity id and package entity id are required");
         }
 

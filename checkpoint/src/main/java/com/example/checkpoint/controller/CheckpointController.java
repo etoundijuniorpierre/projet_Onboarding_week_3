@@ -15,9 +15,7 @@ import java.util.List;
 @RequestMapping("/api/checkpoint")
 public class CheckpointController {
 
-
     private final CheckpointService checkpointService;
-
 
     private final CheckpointMapper checkpointMapper;
 

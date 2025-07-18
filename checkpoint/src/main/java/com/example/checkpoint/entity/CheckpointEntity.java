@@ -14,10 +14,10 @@ public class CheckpointEntity {
     private Long id;
 
     @Column
-    private Long packageEntityId;
+    private Long packageId;
 
     @Column
-    private Long locationEntityId;
+    private Long locationId;
 
     @Column
     private LocalDateTime passDateTime = LocalDateTime.now();
