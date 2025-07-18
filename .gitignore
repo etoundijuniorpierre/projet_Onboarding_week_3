@@ -1,6 +1,7 @@
 # IntelliJ IDEA
 .idea/
 *.iml
+.mvn/
 
 # Maven
 target/
@@ -11,7 +12,6 @@ pom.xml.next
 release.properties
 dependency-reduced-pom.xml
 .gitattributes
-.gitignore
 maven-wrapper.properties
 mvnw
 mvnw.cmd
